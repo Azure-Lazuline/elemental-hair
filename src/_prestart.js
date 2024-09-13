@@ -1,11 +1,11 @@
-import './_core.js';
+window.elementalhair = {};
 
-sc.AddElementRecolorable=function(basefile, palette){
+elementalhair.AddAsset=function(basefile, palette){
 	const img = new ig.Image("media/element-hair/" + palette);
 
 	const onloadBackup = img.onload.bind(img);
 	let resolve;
-	sc.elementhairpalettes[basefile] = new Promise(res => (resolve = res));
+	elementalhair.palettes[basefile] = new Promise(res => (resolve = res));
 	img.onload = function() {
 		onloadBackup();
 		resolve(img);
@@ -14,29 +14,29 @@ sc.AddElementRecolorable=function(basefile, palette){
 
 //main function, run once
 {
-	sc.elementhairelement = 0;
-	sc.elementhairpalettes = {};
+	elementalhair.currentElement = 0;
+	elementalhair.palettes = {};
 
-	sc.AddElementRecolorable("media/entity/player/move.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/throw.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/move-weak.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/hugging.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/poses.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/sleeping.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/entity/player/special.png", "lea-palette.png");
-	sc.AddElementRecolorable("media/gui/menu.png", "lea-dialogue-palette.png");
-	sc.AddElementRecolorable("media/face/lea.png", "lea-dialogue-palette.png");
-	sc.AddElementRecolorable("media/face/lea-hand.png", "lea-dialogue-palette.png");
-	sc.AddElementRecolorable("media/face/lea-panic.png", "lea-dialogue-palette.png");
-	sc.AddElementRecolorable("media/face/lea-special.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/entity/player/move.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/throw.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/move-weak.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/hugging.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/poses.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/sleeping.png", "lea-palette.png");
+	elementalhair.AddAsset("media/entity/player/special.png", "lea-palette.png");
+	elementalhair.AddAsset("media/gui/menu.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/face/lea.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/face/lea-hand.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/face/lea-panic.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/face/lea-special.png", "lea-dialogue-palette.png");
 }
 ig.Image.inject({
 	onload(){
-		if(sc.elementhairpalettes[this.path] == null) return this.parent();
+		if(elementalhair.palettes[this.path] == null) return this.parent();
 
 		const parent = this.parent.bind(this);
 		// wait for the palette to be loaded
-		sc.elementhairpalettes[this.path].then(paletteimg => {
+		elementalhair.palettes[this.path].then(paletteimg => {
 			let palettecanvas = ig.$new("canvas");
 			palettecanvas.width = paletteimg.data.width;
 			palettecanvas.height = paletteimg.data.height;
@@ -106,7 +106,7 @@ ig.Image.inject({
 		if(this.elementhairreplacements != null && sc.options.get("element-hair-enable"))
 		{ //if a replaceable file, draw the new one instead, with all the same parameters
 			let olddata = this.data;
-			this.data = this.elementhairreplacements[sc.elementhairelement];
+			this.data = this.elementhairreplacements[elementalhair.currentElement];
 			this.parent(...args);
 			this.data = olddata;
 		}
@@ -120,7 +120,7 @@ ig.Image.inject({
 ig.ENTITY.Player.inject({
   update(...args) {
 
-	  sc.elementhairelement = this.model.currentElementMode;
+	  elementalhair.currentElement = this.model.currentElementMode;
 
       return this.parent(...args);
   },
@@ -133,6 +133,7 @@ ig.MessageAreaGui.inject({
 		  if(c == "main.lea" && sc.model.player.currentElementMode != 0 && sc.options.get("element-hair-auto-neutral"))
 		  { //swap to neutral so the portrait matches
 				sc.model.player.setElementMode(0, true);
+				elementalhair.currentElement = 0; //set the displayed color to neutral even when in pause menu cutscenes whete player.update doesn't run
 		  }
 	  }
       this.parent(a, d, c);
