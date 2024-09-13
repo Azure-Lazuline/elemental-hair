@@ -5,7 +5,7 @@
   "description": {
     "en_US": "Changes Lea's hair color to match her current element."
   },
-  "repository": "",
+  "repository": "https://github.com/Azure-Lazuline/elemental-hair",
   "tags": ["cosmetic"],
   "authors": "Azure Lazuline",
   "icons": {
