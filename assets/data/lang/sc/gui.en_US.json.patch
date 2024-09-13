@@ -1,0 +1,17 @@
+{
+    "labels": {
+        "options": {
+            "headers": {
+                "element-hair": "Elemental Hair"
+            },
+            "element-hair-enable": {
+                "name": "Enable Elemental Hair",
+                "description": "Change your hair color to match your current element."
+            },
+            "element-hair-auto-neutral": {
+                "name": "Neutral In Cutscenes",
+                "description": "Return to neutral during cutscenes."
+            },
+        }
+    }
+}

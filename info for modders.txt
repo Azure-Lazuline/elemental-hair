@@ -1,0 +1,5 @@
+This system is pretty easy to extend for your own custom characters.
+I included "xpc-elemental-hair-example.zip" which shows the code and assets needed for it.
+It applies the elemental hair palette to Triblader-Lea in the XPC mod, and should be somewhat
+self-explanatory. Maybe in the future that mod will have it built-in, so this would be
+redundant, but it's a good example either way!
