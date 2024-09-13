@@ -1,20 +1,22 @@
 import './_core.js';
 
 sc.AddElementRecolorable=function(basefile, palette){
-	//let img = new ig.Image("media/element-hair/"+palette);
-	let img = new ig.Image();
-	img.loaded = false;
-	img.path = "media/element-hair/"+palette;
-	img.load(); //manually call loading on main thread to ensure these are ready in order (i couldn't find a better way)
-	sc.elementhairpalettes[basefile] = img;
+	const img = new ig.Image("media/element-hair/" + palette);
+
+	const onloadBackup = img.onload.bind(img);
+	let resolve;
+	sc.elementhairpalettes[basefile] = new Promise(res => (resolve = res));
+	img.onload = function() {
+		onloadBackup();
+		resolve(img);
+	}.bind(img);
 }
 
 //main function, run once
 {
 	sc.elementhairelement = 0;
-	sc.elementhairpalettes = [];
-	
-	//you can add your own recolorables in your own mod with this format, should be easy enough to figure out!
+	sc.elementhairpalettes = {};
+
 	sc.AddElementRecolorable("media/entity/player/move.png", "lea-palette.png");
 	sc.AddElementRecolorable("media/entity/player/throw.png", "lea-palette.png");
 	sc.AddElementRecolorable("media/entity/player/move-weak.png", "lea-palette.png");
@@ -28,17 +30,13 @@ sc.AddElementRecolorable=function(basefile, palette){
 	sc.AddElementRecolorable("media/face/lea-panic.png", "lea-dialogue-palette.png");
 	sc.AddElementRecolorable("media/face/lea-special.png", "lea-dialogue-palette.png");
 }
-
 ig.Image.inject({
 	onload(){
-		this.elementhairreplacements = null;
-		if(sc.elementhairpalettes[this.path]!=null){
-			//console.log("recoloring " + this.path);
+		if(sc.elementhairpalettes[this.path] == null) return this.parent();
 
-			let paletteimg = sc.elementhairpalettes[this.path];
-			if(!paletteimg.loaded){
-				paletteimg.load(); //it hit a threading issue anyway - just load it manually. I don't know why both things are needed...
-			}
+		const parent = this.parent.bind(this);
+		// wait for the palette to be loaded
+		sc.elementhairpalettes[this.path].then(paletteimg => {
 			let palettecanvas = ig.$new("canvas");
 			palettecanvas.width = paletteimg.data.width;
 			palettecanvas.height = paletteimg.data.height;
@@ -97,8 +95,9 @@ ig.Image.inject({
 				this.elementhairreplacements.push(this.data);
 				this.data = olddata;
 			}
-		}
-		this.parent();
+
+			parent();
+		});
 	}
 });
 
