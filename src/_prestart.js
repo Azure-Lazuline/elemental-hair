@@ -1,7 +1,12 @@
 window.elementalhair = {};
 
-elementalhair.AddAsset=function(basefile, palette){
+elementalhair.AddAsset=function(basefile, palette, func){
+	//basefile = the root image path to replace
+	//palette = the palette file to recolor that image with (6 rows, one for the base colors, then neutral heat cold shock and wave
+	//func = optional. Only replace the image when this evaluates to true
+	
 	const img = new ig.Image("media/element-hair/" + palette);
+	elementalhair.funcs[basefile] = func;
 
 	const onloadBackup = img.onload.bind(img);
 	let resolve;
@@ -16,6 +21,7 @@ elementalhair.AddAsset=function(basefile, palette){
 {
 	elementalhair.currentElement = 0;
 	elementalhair.palettes = {};
+	elementalhair.funcs = {};
 
 	elementalhair.AddAsset("media/entity/player/move.png", "lea-palette.png");
 	elementalhair.AddAsset("media/entity/player/throw.png", "lea-palette.png");
@@ -29,10 +35,18 @@ elementalhair.AddAsset=function(basefile, palette){
 	elementalhair.AddAsset("media/face/lea-hand.png", "lea-dialogue-palette.png");
 	elementalhair.AddAsset("media/face/lea-panic.png", "lea-dialogue-palette.png");
 	elementalhair.AddAsset("media/face/lea-special.png", "lea-dialogue-palette.png");
+
+	elementalhair.AddAsset("media/entity/player/move-shizuka.png", "shizuka-palette.png", function(){ return sc.model.player.name == "Shizuka0"; });
+	elementalhair.AddAsset("media/entity/player/throw-shizuka.png", "shizuka-palette.png",  function(){ return sc.model.player.name == "Shizuka0"; });
+	elementalhair.AddAsset("media/entity/player/poses-shizuka.png", "shizuka-palette.png",  function(){ return sc.model.player.name == "Shizuka0"; });
+	elementalhair.AddAsset("media/entity/player/shizuka-special.png", "shizuka-palette.png", function(){ return sc.model.player.name == "Shizuka0"; });
+	elementalhair.AddAsset("media/face/shizuka.png", "shizuka-dialogue-palette.png", function(){ return sc.model.player.name == "Shizuka0"; });
 }
 ig.Image.inject({
 	onload(){
 		if(elementalhair.palettes[this.path] == null) return this.parent();
+
+		this.elementalhairfunc = elementalhair.funcs[this.path];
 
 		const parent = this.parent.bind(this);
 		// wait for the palette to be loaded
@@ -103,7 +117,8 @@ ig.Image.inject({
 
 ig.Image.inject({
 	draw(...args){
-		if(this.elementhairreplacements != null && sc.options.get("element-hair-enable"))
+		if(this.elementhairreplacements != null && sc.options.get("element-hair-enable")
+			&& (this.elementalhairfunc == null || this.elementalhairfunc()))
 		{ //if a replaceable file, draw the new one instead, with all the same parameters
 			let olddata = this.data;
 			this.data = this.elementhairreplacements[elementalhair.currentElement];
@@ -133,7 +148,7 @@ ig.MessageAreaGui.inject({
 		  if(c == "main.lea" && sc.model.player.currentElementMode != 0 && sc.options.get("element-hair-auto-neutral"))
 		  { //swap to neutral so the portrait matches
 				sc.model.player.setElementMode(0, true);
-				elementalhair.currentElement = 0; //set the displayed color to neutral even when in pause menu cutscenes whete player.update doesn't run
+				elementalhair.currentElement = 0; //set the displayed color to neutral even when in pause menu cutscenes where player.update doesn't run
 		  }
 	  }
       this.parent(a, d, c);
@@ -143,13 +158,26 @@ ig.MessageAreaGui.inject({
 sc.Arena.inject({
   enterArenaMode(...args) {
 	
-	//the game already snaps you to neutral on the first frame the fight begins which is awkward, so i do it ahead of time
-	sc.model.player.setElementMode(0, true);
+	//the game already snaps you to neutral with no effect on the first frame the fight begins which is awkward, so i do it ahead of time
+	if(sc.options.get("element-hair-enable"))
+	{
+		sc.model.player.setElementMode(0, true);
+	}
 	
 	this.parent(...args);
   },
 });
 
+ig.ENTITY.Door.inject({
+	open(a, d){
+		if(this.map == "hideout.inner-1" && sc.model.player.name == "Shizuka0"
+			&& sc.options.get("element-hair-enable"))
+		{ //set Shizuka to neutral upon entering the hideout in the intro so the cutscene shows normal colors
+			sc.model.player.setElementMode(0, true);			
+		}
+		this.parent(a, d);
+	},
+});
 
 let options = {};
 for (let [key, value] of Object.entries(sc.OPTIONS_DEFINITION)) {
