@@ -44,13 +44,14 @@ elementalhair.AddAsset=function(basefile, palette, func){
 }
 ig.Image.inject({
 	onload(){
-		if(elementalhair.palettes[this.path] == null) return this.parent();
+		var path2 = this.path.trim();
+		if(elementalhair.palettes[path2] == null) return this.parent();
 
-		this.elementalhairfunc = elementalhair.funcs[this.path];
+		this.elementalhairfunc = elementalhair.funcs[path2];
 
 		const parent = this.parent.bind(this);
 		// wait for the palette to be loaded
-		elementalhair.palettes[this.path].then(paletteimg => {
+		elementalhair.palettes[path2].then(paletteimg => {
 			let palettecanvas = ig.$new("canvas");
 			palettecanvas.width = paletteimg.data.width;
 			palettecanvas.height = paletteimg.data.height;
@@ -116,7 +117,7 @@ ig.Image.inject({
 });
 
 ig.Image.inject({
-	draw(...args){
+	draw(...args){		
 		if(this.elementhairreplacements != null && sc.options.get("element-hair-enable")
 			&& (this.elementalhairfunc == null || this.elementalhairfunc()))
 		{ //if a replaceable file, draw the new one instead, with all the same parameters
