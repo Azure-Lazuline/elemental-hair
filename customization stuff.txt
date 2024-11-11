@@ -1,0 +1,17 @@
+If you want to modify this for your own custom palettes, you can just change the palette files in
+assets/media/element-hair. The first line is reference colors, and the next 5 lines are for neutral,
+heat, cold, shock, and wave. (Some files have 5 more lines; those are the five palettes for if you have
+"hair+armor" selected instead of just hair. You can trim it down to just the normal ones if you want.)
+You can check the psd files for easy gradient editing and to see it applied to the sprites as you go!
+
+I've included boki-colors.zip as an example mod for if you don't want to overwrite this mod's files.
+It replaces Lea's colors with Boki's from Copy Kitty, based on a few of the weapon palettes there. It 
+also adds a little extra thing somewhere...
+
+
+This system is pretty easy to extend for your own custom characters, or to palette-swap other things.
+I included "xpc-elemental-hair-example.zip" which shows the code and assets needed for it.
+It applies the elemental hair palette to Triblader-Lea in the XPC mod, and should be somewhat
+self-explanatory. There's also a few different ways to make the recolor only apply conditionally,
+only to certain characters or when certain conditions are met. Check the main function in
+prestart.js for details.

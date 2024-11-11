@@ -1,6 +1,0 @@
-This system is pretty easy to extend for your own custom characters.
-I included "xpc-elemental-hair-example.zip" which shows the code and assets needed for it.
-It applies the elemental hair palette to Triblader-Lea in the XPC mod, and should be somewhat
-self-explanatory. There's also a way to make the recolor only apply conditionally, so it won't
-recolor the NPC version of a character that's also playable. I use this for Shizuka in the intro
-scene, so you can check the code for that.

@@ -4,9 +4,18 @@
             "headers": {
                 "element-hair": "Elemental Hair"
             },
-            "element-hair-enable": {
-                "name": "Enable Elemental Hair",
-                "description": "Change your hair color to match your current element."
+            "element-hair-type": {
+                "name": "Elemental Palettes",
+                "description": "Change your hair color to match your current element.",
+				"group": [
+					"Hair+Armor",
+					"Just Hair",
+					"None"
+				]
+            },
+            "element-hair-party": {
+                "name": "Party Members",
+                "description": "Change party/NPC colors too. (Requires \\c[3]Party Elemental Effects\\c[0] mod!)"
             },
             "element-hair-auto-neutral": {
                 "name": "Neutral In Cutscenes",

@@ -1,9 +1,9 @@
 {
   "id": "element-hair",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "title": "Elemental Hair",
   "description": {
-    "en_US": "Changes Lea's hair color to match her current element."
+    "en_US": "Changes Lea's hair color based on her element. (Check the repo for customization!)"
   },
   "repository": "https://github.com/Azure-Lazuline/elemental-hair",
   "tags": ["cosmetic"],
@@ -11,6 +11,6 @@
   "icons": {
     "24": "icon24.png"
   },
-  "prestart": "src/_prestart.js",
+  "prestart": "_prestart.js",
   "assets": ["data/lang/sc/gui.en_US.json.patch"]
 }
