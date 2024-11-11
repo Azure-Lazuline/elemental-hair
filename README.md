@@ -12,7 +12,7 @@ There's a few toggles in the options menu (under "Video"), like automatically sw
 
 If you want to modify this for your own custom palettes, you can just change the palette files in `assets/media/element-hair`. The first line is reference colors, and the next 5 lines are for neutral, heat, cold, shock, and wave. (Some files have 5 more lines; those are the five palettes for if you have "hair+armor" selected instead of just hair. You can trim it down to just the normal ones if you want.) You can check the psd files for easy gradient editing and to see it applied to the sprites as you go!
 
-I've included **boki-colors.zip** as an example mod for if you don't want to overwrite this mod's files. It replaces Lea's colors with Boki's from Copy Kitty, based on a few of the weapon palettes there. It  also adds a little extra thing somewhere...
+I've included **boki-colors.zip** as an example mod for if you don't want to overwrite this mod's files. Just extract it into your mods folder. It replaces Lea's colors with Boki's from Copy Kitty, based on a few of the weapon palettes there. It  also adds a little extra thing somewhere...
 
 This system is pretty easy to extend for your own custom characters, or to palette-swap other things.
 

@@ -5,8 +5,8 @@ heat, cold, shock, and wave. (Some files have 5 more lines; those are the five p
 You can check the psd files for easy gradient editing and to see it applied to the sprites as you go!
 
 I've included boki-colors.zip as an example mod for if you don't want to overwrite this mod's files.
-It replaces Lea's colors with Boki's from Copy Kitty, based on a few of the weapon palettes there. It 
-also adds a little extra thing somewhere...
+Just extract it into your mods folder. It replaces Lea's colors with Boki's from Copy Kitty, based 
+on a few of the weapon palettes there. It also adds a little extra thing somewhere...
 
 
 This system is pretty easy to extend for your own custom characters, or to palette-swap other things.
