@@ -15,7 +15,7 @@
             },
             "element-hair-party": {
                 "name": "Party Members",
-                "description": "Change party/NPC colors too. (Requires \\c[3]Party Elemental Effects\\c[0] mod!)"
+                "description": "Change party/NPC colors too. (Requires \\c[3]Party Element Effects\\c[0] mod!)"
             },
             "element-hair-auto-neutral": {
                 "name": "Neutral In Cutscenes",

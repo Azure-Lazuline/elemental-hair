@@ -1,0 +1,9 @@
+This system is pretty easy to extend for your own custom characters, or to palette-swap other things.
+I included "xpc-elemental-hair-example.zip" which shows the code and assets needed for it.
+It applies the elemental hair palette to Triblader-Lea in the XPC mod, and should be somewhat
+self-explanatory. There's also a few different ways to make the recolor only apply conditionally,
+only to certain characters or when certain conditions are met. Check the main function in
+prestart.js for details.
+
+You can make a palette file that's just 2 lines if you don't want it to be based on element at all.
+It'll just replace the first line of colors with the second unconditionally.

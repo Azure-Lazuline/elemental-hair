@@ -84,6 +84,7 @@ elementalhair.GetCharacterElement=function(characterlist){
 	elementalhair.AddAsset("media/face/lea-hand.png", "lea-dialogue-palette.png");
 	elementalhair.AddAsset("media/face/lea-panic.png", "lea-dialogue-palette.png");
 	elementalhair.AddAsset("media/face/lea-special.png", "lea-dialogue-palette.png");
+	elementalhair.AddAsset("media/parallax/title/lea.png", "lea-dialogue-palette.png"); //did you know going back to the title screen will show it with your last element?
 
 	elementalhair.AddAsset("media/entity/player/move-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
 	elementalhair.AddAsset("media/entity/player/throw-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
@@ -99,7 +100,7 @@ elementalhair.GetCharacterElement=function(characterlist){
 	elementalhair.AddAsset("media/entity/npc/fancyguy.png", "apollo-palette.png", ["Apollo", "avatar.apollo", "avatar.apollo-2", "avatar.apollo-3", "avatar.apollo-4"], partyenabled);
 	elementalhair.AddAsset("media/entity/npc/sidekick.png", "joern-palette.png", ["Joern"], partyenabled);
 
-	//extra files from XPC, might as well add them here since it's one line each
+	//extra files from XPC, might as well add them here since it's one line each. Applying a palette to a non-existing image doesn't mess anything up
 	elementalhair.AddAsset("media/entity/npc/lea-hexa.png", "lea-palette.png");
 	elementalhair.AddAsset("media/entity/npc/lea-tri.png", "lea-palette.png");
 	elementalhair.AddAsset("media/entity/npc/schneiderEatFix.png", "lukas-palette.png", ["Schneider"], partyenabled);
@@ -118,9 +119,9 @@ ig.Image.inject({
 		elementalhair.palettes[path2].then(paletteimg => {
 			
 			this.elementalnumcolors=paletteimg.data.height - 1;
-			if (this.elementalnumcolors != 5 && this.elementalnumcolors != 10)
+			if (this.elementalnumcolors != 1 && this.elementalnumcolors != 5 && this.elementalnumcolors != 10)
 			{
-				console.error(paletteimg.path + ": Elemental hair palette image must be 6 or 11 pixels tall.");
+				console.error(paletteimg.path + ": Elemental hair palette image must be 2, 6, or 11 pixels tall.");
 				parent();
 				return;
 			}
@@ -191,13 +192,15 @@ ig.Image.inject({
 
 ig.Image.inject({
 	draw(...args){		
-		if(this.elementhairreplacements != null && sc.options.get("element-hair-type") != 2
+		if(this.elementhairreplacements != null
 			&& (this.elementalhairfunc == null || this.elementalhairfunc()))
 		{ //if a replaceable file, draw the new one instead, with all the same parameters
 			let olddata = this.data;
 			let num = elementalhair.GetCharacterElement(this.elementalhaircharacters);
 			if (this.elementalnumcolors == 10 && sc.options.get("element-hair-type") == 0)
 				num += 5;
+			if (this.elementalnumcolors == 1 || sc.options.get("element-hair-type") == 2)
+				num = 0;
 			this.data = this.elementhairreplacements[num];
 			this.parent(...args);
 			this.data = olddata;
@@ -233,12 +236,12 @@ ig.MessageAreaGui.inject({
 });
 
 sc.Arena.inject({
-  enterArenaMode(...args) {
-	
-	//the game already snaps you to neutral with no effect on the first frame the fight begins which is awkward, so i do it ahead of time
-	if(sc.options.get("element-hair-type") != 2)
+  onLevelLoadStart(...args) {
+	if (this.active)
 	{
-		sc.model.player.setElementMode(0, true);
+		//the game snaps you to neutral with no VFX on the first frame the fight actually begins which is awkward, so i do it on level load too
+		if (!(this.runtime.rush && this.runtime.currentRound > 0) && sc.options.get("element-hair-type") != 2)
+			sc.model.player.setElementMode(0, true);
 	}
 	
 	this.parent(...args);
