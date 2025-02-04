@@ -4,14 +4,9 @@
             "headers": {
                 "element-hair": "Elemental Hair"
             },
-            "element-hair-type": {
+            "element-hair-enabled": {
                 "name": "Elemental Palettes",
-                "description": "Change your hair color to match your current element.",
-				"group": [
-					"Hair+Armor",
-					"Just Hair",
-					"None"
-				]
+                "description": "Change your hair and armor color to match your current element."
             },
             "element-hair-party": {
                 "name": "Party Members",

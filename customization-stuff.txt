@@ -1,11 +1,9 @@
 If you want to modify this for your own custom palettes, you can just change the palette files in
 assets/media/element-hair. The first line is reference colors, and the next 5 lines are for neutral,
-heat, cold, shock, and wave.
+heat, cold, shock, and wave. (You can also make it be just two lines, for unconditional recoloring.)
 
-Some files have 5 more lines; those are the five palettes for if you have "hair+armor" selected
-instead of just hair. You can trim it down to just the normal set if you want, or make it be 2
-lines and it'll replace the first with the second unconditionally (not based on element at all).
-You can check the psd files for easy gradient editing and to see it applied to the sprites as you go!
+Check the psd files for easy gradient editing and to see it applied to the sprites as you go!
+You can add more files to be recolored at the bottom of postload.js.
 
 I've included boki-colors.zip as an example mod for if you don't want to overwrite this mod's files.
 Just extract it into your mods folder. It replaces Lea's colors with Boki's from Copy Kitty, based 

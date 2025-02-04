@@ -1,9 +1,15 @@
 This system is pretty easy to extend for your own custom characters, or to palette-swap other things.
-I included "xpc-elemental-hair-example.zip" which shows the code and assets needed for it.
-It applies the elemental hair palette to Triblader-Lea in the XPC mod, and should be somewhat
-self-explanatory. There's also a few different ways to make the recolor only apply conditionally,
-only to certain characters or when certain conditions are met. Check the main function in
-prestart.js for details.
+You can look at the code at the bottom of postload.js to see the general format, and boki-colors.zip
+for an example of how to make a standalone mod. All your additions should be in prestart.
 
-You can make a palette file that's just 2 lines if you don't want it to be based on element at all.
-It'll just replace the first line of colors with the second unconditionally.
+A few small details:
+- You can put your code in a "if (window.elementalhair)" block to only run if this is installed.
+- It's possible to make a palette apply to only specific characters, which works for party members and
+    such, automatically matching *their* element instead of yours.
+- You can add arbitrary conditionals to make the recolors only apply under certain conditions, like
+    while a certain buff is active, or if you get a certain custom upgrade.
+- If multiple palettes are added to the same image, only the *last* one will apply. It can still 
+    fall through to earlier ones if the condition on the later ones aren't met.
+- If elemental palettes are turned off in the options, it'll still read from the neutral palette you
+    assigned, unless "revertIfOff" is enabled for that file.
+- You can make a palette file that's just 2 lines if you don't want it to be based on element at all.
