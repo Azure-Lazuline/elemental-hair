@@ -82,6 +82,7 @@ ig.Storage.inject({
 		//list of rooms to auto-return to neutral in (for ending cutscenes mostly)
 		if (a.name == "arid-dng/second/f99/end-room" //post-elephant
 			|| a.name == "arid/lab/ug-04-sidwell-meeting-room" && plotline == 50150 //post-dlc
+			|| a.name == "evo-village/center" && plotline >= 52000 //post-fish
 			|| a.name == "hideout/inner-1") //entering the hideout
 		{
 			if(sc.model && sc.model.player && sc.options.get("element-hair-enabled"))

@@ -40,6 +40,9 @@ elementalhair.AddAsset=function(baseFile, palette, characterList, func, revertIf
 	//console.warn("pushed: " + file.id + " " + Object.entries(file));
 	
 	window.elementalhair.files.push(file);
+	
+	if (baseFile == "media/entity/player/move.png") //i missed this one and want it to retroactively apply to recolor mods made after this.
+		elementalhair.AddAsset("media/entity/npc/captain.png", palette, characterList, func, revertIfOff); //in hindsight i should've done similar "auto-batching" for more stuff
 };
 
 elementalhair.GetCharacterElement=function(characterlist){
