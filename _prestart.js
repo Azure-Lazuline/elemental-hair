@@ -88,6 +88,9 @@ ig.Storage.inject({
 			if(sc.model && sc.model.player && sc.options.get("element-hair-enabled"))
 				sc.model.player.setElementMode(0, true);
 		}
+		
+		elementalhair.leaPettingShizuka = null;
+		
 		this.parent(a);
 	},
 });
@@ -97,6 +100,14 @@ ig.DreamFx.inject({
 		if(sc.model && sc.model.player && sc.options.get("element-hair-enabled"))
 			sc.model.player.setElementMode(0, true); //reset element when dreaming (so Lea always logs in with neutral)
 		this.parent(...args);
+	}
+});
+
+ig.ACTION_STEP.SHOW_EXTERN_ANIM.inject({
+	start(a){
+		this.parent(a);
+		if (a.name == "shizuka" && this.animName == "leaPettingPre") //most animations on this sheet are recolored based on shizuka. but the petting animation has Lea in it too and that's more important. so set a flag that can be read to change who's palette it uses. this is only cleared on level load
+			elementalhair.leaPettingShizuka = true;
 	}
 });
 

@@ -203,7 +203,6 @@ ig.Image.inject({
 	}
 });
 
-
 //main function, run once
 {
 	elementalhair.playerElement = 0;
@@ -237,11 +236,11 @@ ig.Image.inject({
 	elementalhair.AddAsset("media/parallax/tower/1-lea.png", "lea-dialogue-palette.png");
 	elementalhair.AddAsset("media/parallax/title/lea.png", "lea-dialogue-palette.png"); //did you know going back to the title screen will show it with your last element?
 
-	var shizukaenabled = function(){ return sc.options.get("element-hair-party") || sc.model.player.name == "Shizuka0"; };
-	elementalhair.AddAsset("media/entity/player/move-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
-	elementalhair.AddAsset("media/entity/player/throw-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
-	elementalhair.AddAsset("media/entity/player/poses-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
-	elementalhair.AddAsset("media/entity/player/shizuka-special.png", "shizuka-palette.png", ["Shizuka", "Shizuka0", "avatar.shizuka"], shizukaenabled);
+	var shizukaenabled = function(){ return (sc.options.get("element-hair-party") || sc.model.player.name == "Shizuka0") && !elementalhair.leaPettingShizuka; };
+	elementalhair.AddAsset("media/entity/player/move-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0"], shizukaenabled);
+	elementalhair.AddAsset("media/entity/player/throw-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0"], shizukaenabled);
+	elementalhair.AddAsset("media/entity/player/poses-shizuka.png", "shizuka-palette.png", ["Shizuka", "Shizuka0"], shizukaenabled);
+	elementalhair.AddAsset("media/entity/player/shizuka-special.png", "shizuka-palette.png", ["Shizuka", "Shizuka0"], shizukaenabled);
 	elementalhair.AddAsset("media/face/shizuka.png", "shizuka-dialogue-palette.png", ["Shizuka", "Shizuka0"], function(){ return sc.model.player.name == "Shizuka0"; });
 
 	elementalhair.AddAsset("media/entity/npc/emilie.png", "emilie-palette.png", ["Emilie"]);
@@ -249,7 +248,7 @@ ig.Image.inject({
 	elementalhair.AddAsset("media/entity/npc/glasses.png", "ctron-palette.png", ["Glasses"]);
 	elementalhair.AddAsset("media/entity/npc/schneider.png", "lukas-palette.png", ["Schneider", "Schneider2"]);
 	elementalhair.AddAsset("media/entity/npc/luke.png", "lukas-palette.png", ["Luke"]);
-	elementalhair.AddAsset("media/entity/npc/fancyguy.png", "apollo-palette.png", ["Apollo", "avatar.apollo", "avatar.apollo-2", "avatar.apollo-3", "avatar.apollo-4"]);
+	elementalhair.AddAsset("media/entity/npc/fancyguy.png", "apollo-palette.png", ["Apollo", "apollo-2", "apollo-3", "apollo-4"]);
 	elementalhair.AddAsset("media/entity/npc/sidekick.png", "joern-palette.png", ["Joern"]);
 
 	//-----------------
