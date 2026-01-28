@@ -111,6 +111,39 @@ ig.ACTION_STEP.SHOW_EXTERN_ANIM.inject({
 	}
 });
 
+ig.Game.inject({
+	loadingComplete(...args){
+		this.parent(...args);
+		
+		if (sc.model && sc.model.player)
+		{
+			elementalhair.unlockedAnyElement = sc.model.player.hasElement(sc.ELEMENT.HEAT) || sc.model.player.hasElement(sc.ELEMENT.COLD)
+				|| sc.model.player.hasElement(sc.ELEMENT.SHOCK) || sc.model.player.hasElement(sc.ELEMENT.WAVE);
+			
+			if (!sc.model.player.core[sc.PLAYER_CORE.ELEMENT_CHANGE])
+				elementalhair.unlockedAnyElement = false;
+				
+			//console.warn("unlockedAnyElement: " + elementalhair.unlockedAnyElement);
+		}
+	}
+});
+sc.PlayerModel.inject({
+	setCore(...args){
+		this.parent(...args);
+		
+		if (sc.model && sc.model.player)
+		{
+			elementalhair.unlockedAnyElement = sc.model.player.hasElement(sc.ELEMENT.HEAT) || sc.model.player.hasElement(sc.ELEMENT.COLD)
+				|| sc.model.player.hasElement(sc.ELEMENT.SHOCK) || sc.model.player.hasElement(sc.ELEMENT.WAVE);
+
+			if (!sc.model.player.core[sc.PLAYER_CORE.ELEMENT_CHANGE])
+				elementalhair.unlockedAnyElement = false;
+
+			//console.warn("unlockedAnyElement: " + elementalhair.unlockedAnyElement);
+		}
+	}
+});
+
 //add new property "unremovable" to items so the game doesn't auto-delete anything put under the "skins" tab if there's no skin data found,
 //so you can use it for custom palette reward items
 sc.PlayerModel.inject({

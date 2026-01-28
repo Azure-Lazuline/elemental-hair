@@ -246,38 +246,41 @@ ig.Image.inject({
 	elementalhair.AddAsset("media/entity/npc/emilie.png", "emilie-palette.png", ["Emilie"]);
 	elementalhair.AddAsset("media/entity/npc/emilie-attack.png", "emilie-palette.png", ["Emilie"]);
 	elementalhair.AddAsset("media/entity/npc/glasses.png", "ctron-palette.png", ["Glasses"]);
-	elementalhair.AddAsset("media/entity/npc/schneider.png", "lukas-palette.png", ["Schneider", "Schneider2"]);
+	elementalhair.AddAsset("media/entity/npc/schneider.png", "lukas-palette.png", ["Schneider", "Schneider2", "Lukas"]);
 	elementalhair.AddAsset("media/entity/npc/luke.png", "lukas-palette.png", ["Luke"]);
 	elementalhair.AddAsset("media/entity/npc/fancyguy.png", "apollo-palette.png", ["Apollo", "apollo-2", "apollo-3", "apollo-4"]);
 	elementalhair.AddAsset("media/entity/npc/sidekick.png", "joern-palette.png", ["Joern"]);
+
+	elementalhair.AddAsset("media/entity/npc/guest/lily.png", "lily-palette.png", ["lily"]);
 
 	//-----------------
 	//-   XPC stuff   -
 	//-----------------
 	elementalhair.AddAsset("media/entity/npc/lea-hexa.png", "lea-palette.png");
 	elementalhair.AddAsset("media/entity/npc/lea-tri.png", "lea-palette.png");
-	elementalhair.AddAsset("media/entity/npc/schneiderEatFix.png", "lukas-palette.png", ["Schneider"]);
+	elementalhair.AddAsset("media/entity/npc/schneiderEatFix.png", "lukas-palette.png", ["Schneider", "Schneider2", "Lukas"]);
 	elementalhair.AddAsset("media/entity/npc/lukeEatFix.png", "lukas-palette.png", ["Luke"]);
 
 	elementalhair.AddAsset("media/entity/npc/triblader-lea.png", "triblader-lea-palette.png");
 	elementalhair.AddAsset("media/entity/npc/triblader-lea-extra.png", "triblader-lea-palette.png");
 
-	var hasHeat = function(){ return sc.model.player.hasElement(sc.ELEMENT.HEAT); }
-	elementalhair.AddAsset("media/entity/npc/triblader2.png", "xpc-triblader2-palette.png", ["triblader2", "triblader2-freq-arts"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader2-extra.png", "xpc-triblader2-palette.png", ["triblader2", "triblader2-freq-arts"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader3.png", "xpc-triblader3-palette.png", ["triblader3"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader3-extra.png", "xpc-triblader3-palette.png", ["triblader3"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader4.png", "xpc-triblader4-palette.png", ["triblader4"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader4-extra.png", "xpc-triblader4-palette.png", ["triblader4"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader5.png", "xpc-triblader5-palette.png", ["triblader5"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/triblader5-extra.png", "xpc-triblader5-palette.png", ["triblader5"], hasHeat, true);
+	var unlockedAnyElement = function(){ return elementalhair.unlockedAnyElement; }
+	
+	elementalhair.AddAsset("media/entity/npc/triblader2.png", "xpc-triblader2-palette.png", ["triblader2", "triblader2-freq-arts"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader2-extra.png", "xpc-triblader2-palette.png", ["triblader2", "triblader2-freq-arts"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader3.png", "xpc-triblader3-palette.png", ["triblader3"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader3-extra.png", "xpc-triblader3-palette.png", ["triblader3"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader4.png", "xpc-triblader4-palette.png", ["triblader4"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader4-extra.png", "xpc-triblader4-palette.png", ["triblader4"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader5.png", "xpc-triblader5-palette.png", ["triblader5"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/triblader5-extra.png", "xpc-triblader5-palette.png", ["triblader5"], unlockedAnyElement, true);
 
-	elementalhair.AddAsset("media/entity/npc/hexacast1.png", "xpc-hexacast-palette.png", ["hexacast1"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/hexacast1-sweeps.png", "xpc-hexacast-palette.png", ["hexacast1"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/hexacast1-triblader.png", "xpc-hexacast-palette.png", ["hexacast1"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/hexacast2.png", "xpc-hexacast-palette.png", ["hexacast2"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/hexacast2-sweeps.png", "xpc-hexacast-palette.png", ["hexacast2"], hasHeat, true);
-	elementalhair.AddAsset("media/entity/npc/hexacast2-triblader.png", "xpc-hexacast-palette.png", ["hexacast2"], hasHeat, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast1.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast1-sweeps.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast1-triblader.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast2.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast2-sweeps.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast2-triblader.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
 
 	var isTribladerLea = function(){ return sc.model.player.name == "triblader-lea"; };
 	elementalhair.AddAsset("media/entity/player/move-weak.png", "triblader-lea-palette.png", null, isTribladerLea);
