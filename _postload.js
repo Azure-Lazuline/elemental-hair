@@ -276,9 +276,11 @@ ig.Image.inject({
 	elementalhair.AddAsset("media/entity/npc/triblader5-extra.png", "xpc-triblader5-palette.png", ["triblader5"], unlockedAnyElement, true);
 
 	elementalhair.AddAsset("media/entity/npc/hexacast1.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast1-sphero.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
 	elementalhair.AddAsset("media/entity/npc/hexacast1-sweeps.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
 	elementalhair.AddAsset("media/entity/npc/hexacast1-triblader.png", "xpc-hexacast-palette.png", ["hexacast1"], unlockedAnyElement, true);
 	elementalhair.AddAsset("media/entity/npc/hexacast2.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
+	elementalhair.AddAsset("media/entity/npc/hexacast2-sphero.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
 	elementalhair.AddAsset("media/entity/npc/hexacast2-sweeps.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
 	elementalhair.AddAsset("media/entity/npc/hexacast2-triblader.png", "xpc-hexacast-palette.png", ["hexacast2"], unlockedAnyElement, true);
 
